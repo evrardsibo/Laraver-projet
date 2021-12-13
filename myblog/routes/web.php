@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\UniqueController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,13 +20,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/form', function(){
-    return view('form');
-});
+Route::get('/form',[MainController::class, 'index'])->middleware('evr');
 
-Route::get('/test', function(){
-    return view('incs.test');
-});
+Route::get('/test', [MainController::class, 'test']);
+
+Route::get('/unique',UniqueController::class);
+
+Route::resource('articles', ArticleController::class);
 
 // Route::get('/env' , function(){
 //     dd(env('DB_DATABASE'));
